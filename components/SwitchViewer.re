@@ -133,12 +133,12 @@ let make = () => {
   let stockMatcher =
     StockDescription.useStockMatcher(Consts.urlOfStocksSpreadsheetJson);
 
-  let handleKeyDown = (k: ReactEvent.Keyboard.t): unit => {
-    ReactEventRe.Keyboard.preventDefault(k);
-    Js.log(ReactEvent.Keyboard.key(k));
+  let handleKeyDown = (e: ReactEvent.Keyboard.t): unit => {
+    e->ReactEvent.Keyboard.preventDefault;
+    Js.log(ReactEvent.Keyboard.key(e));
 
     setCount(_ => 0);
-    setCurrentKey(_ => Some(k));
+    setCurrentKey(_ => Some(e));
   };
 
   React.useEffect0(() => {
