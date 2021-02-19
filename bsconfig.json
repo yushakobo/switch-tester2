@@ -1,24 +1,8 @@
 {
-  "name": "with-reasonml",
+  "name": "switch-tester2",
   "sources": [
     {
-      "dir": "components",
-      "subdirs": true
-    },
-    {
-      "dir": "pages",
-      "subdirs": true
-    },
-    {
-      "dir": "utils",
-      "subdirs": true
-    },
-    {
-      "dir": "models",
-      "subdirs": true
-    },
-    {
-      "dir": "bindings",
+      "dir": "src",
       "subdirs": true
     }
   ],

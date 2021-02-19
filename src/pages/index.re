@@ -1,7 +1,8 @@
-module Head = {
-  [@react.component] [@bs.module "next/head"]
-  external make: (~children: React.element) => React.element = "default";
-};
+// module Head = {
+//   [@react.component] [@bs.module "next/head"]
+//   external make: (~children: React.element) => React.element = "default";
+// };
+open Next;
 
 [@react.component]
 let make = () => {
