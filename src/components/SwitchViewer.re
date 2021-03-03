@@ -60,7 +60,10 @@ module SwitchAttributesView = {
       {attributes
        |> KeySwitch.arrayOfAttributes
        |> Array.map(((k, v)) => {
-            [|<dt> {React.string(k)} </dt>, <dd> {React.string(v)} </dd>|]
+            [|
+              <dt key=k> {React.string(k)} </dt>,
+              <dd key={j|$(k)-$(v)|j}> {React.string(v)} </dd>,
+            |]
           })
        |> Belt.Array.concatMany
        |> React.array}
@@ -124,8 +127,7 @@ module SwitchView = {
 // entry point
 [@react.component]
 let make = () => {
-  let (showDefault, setShowDefault) = React.useState(() => true);
-  let (count, setCount) = React.useState(() => 0);
+  let count = React.useRef(0);
   let (currentKey, setCurrentKey) = React.useState(() => None);
 
   let keyMatcher =
@@ -137,35 +139,34 @@ let make = () => {
     e->ReactEvent.Keyboard.preventDefault;
     Js.log(ReactEvent.Keyboard.key(e));
 
-    setCount(_ => 0);
+    React.Ref.setCurrent(count, 0);
     setCurrentKey(_ => Some(e));
   };
 
-  React.useEffect0(() => {
-    let id =
-      Js.Global.setInterval(
-        () =>
-          if (count >= Consts.claerIntervalSec) {
-            setCount(_ => 0);
-            setShowDefault(_ => true);
-          } else {
-            setCount(c => c + 1);
-            setShowDefault(_ => false);
-          },
-        1000,
-      );
-    Some(() => Js.Global.clearInterval(id));
-  });
+  let onTick = () => {
+    let currentCount = React.Ref.current(count);
+    if (currentCount >= Consts.claerIntervalSec) {
+      React.Ref.setCurrent(count, 0);
+      setCurrentKey(_ => None);
+    } else {
+      React.Ref.setCurrent(count, currentCount + 1);
+    };
+  };
 
   React.useEffect0(() => {
+    let id = Js.Global.setInterval(onTick, 1000);
     addKeybordEventListener("keydown", handleKeyDown);
-    Some(() => removeKeybordEventListener("keyDown", handleKeyDown));
+
+    Some(
+      () => {
+        Js.Global.clearInterval(id);
+        removeKeybordEventListener("keyDown", handleKeyDown);
+      },
+    );
   });
 
   let keySwitch: option(KeySwitch.t) = keyMatcher(currentKey);
   let stock: option(StockDescription.t) = stockMatcher(keySwitch);
 
-  <div className="container">
-    {showDefault ? <DefaultView /> : <SwitchView keySwitch stock />}
-  </div>;
+  <div className="container"> <SwitchView keySwitch stock /> </div>;
 };
