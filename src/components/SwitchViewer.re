@@ -124,11 +124,31 @@ module SwitchView = {
   };
 };
 
+module DebugView = {
+  [@react.component]
+  let make = (~currentKey) => {
+    switch (currentKey) {
+    | None => <p> {React.string("none")} </p>
+    | Some(key) =>
+      <div>
+        <p> {React.string("key: " ++ ReactEvent.Keyboard.key(key))} </p>
+        <p>
+          {React.string(
+             "ctrl: " ++ (ReactEvent.Keyboard.ctrlKey(key) ? "true" : "false"),
+           )}
+        </p>
+      </div>
+    };
+  };
+};
+
 // entry point
 [@react.component]
 let make = () => {
   let count = React.useRef(0);
   let (currentKey, setCurrentKey) = React.useState(() => None);
+  let (last4, setLast4) = React.useState(() => []);
+  let (showDebug, setShowDebug) = React.useState(() => false);
 
   let keyMatcher =
     KeyMapping.useKeyMatcher(Consts.urlOfSwitchesSpreadsheetJson);
@@ -141,6 +161,7 @@ let make = () => {
 
     React.Ref.setCurrent(count, 0);
     setCurrentKey(_ => Some(e));
+    setLast4(prev => [ReactEvent.Keyboard.key(e), ...prev]);
   };
 
   let onTick = () => {
@@ -165,8 +186,23 @@ let make = () => {
     );
   });
 
+  React.useEffect1(
+    () => {
+      switch (Belt.List.take(last4, 4)) {
+      | Some(["0", "Y", "I", "P"]) => setShowDebug(_ => true)
+      | _ => ()
+      };
+      Js.log(Belt.List.toArray(last4));
+      None;
+    },
+    [|last4|],
+  );
+
   let keySwitch: option(KeySwitch.t) = keyMatcher(currentKey);
   let stock: option(StockDescription.t) = stockMatcher(keySwitch);
 
-  <div className="container"> <SwitchView keySwitch stock /> </div>;
+  <div className="container">
+    {showDebug ? <DebugView currentKey /> : React.null}
+    <SwitchView keySwitch stock />
+  </div>;
 };
