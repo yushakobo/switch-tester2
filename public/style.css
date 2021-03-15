@@ -25,8 +25,17 @@ body {
   float: left;
   font-size: 150%;
 }
+ .switch-comment-no-box {
+   display: flex;
+   justify-content: space-between;
+ }
 
 .switch-comment {
+  font-size: 80%;
+  margin: 20px;
+}
+
+.switch-order-no {
   font-size: 80%;
   margin: 20px;
 }

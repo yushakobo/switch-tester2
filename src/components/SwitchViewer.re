@@ -95,7 +95,14 @@ module SwitchView = {
           <img src={s.imageUrl} className="switch-image" />
         </div>
         <div className="summary-info">
-          <p className="switch-comment"> {React.string(s.comment)} </p>
+          <div className="switch-comment-no-box">
+            <span className="switch-comment">
+              {React.string(s.comment)}
+            </span>
+            <span className="switch-order-no">
+              {React.string({j|注文票番号 |j} ++ s.order_no)}
+            </span>
+          </div>
           <p className="switch-name"> {React.string(s.name)} </p>
           <div className="right">
             <span className="stock-description">

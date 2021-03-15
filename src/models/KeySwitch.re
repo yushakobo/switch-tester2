@@ -10,7 +10,7 @@ type t = {
   weight: string,
   comment: string,
   pin: string,
-  stock: string,
+  order_no: string,
   otherAttributes: attributeType,
 };
 
@@ -23,7 +23,7 @@ let default = (): t => {
   weight: "",
   comment: "",
   pin: "",
-  stock: "",
+  order_no: "",
   otherAttributes: Belt.Map.String.empty,
 };
 
@@ -48,7 +48,7 @@ let updateKeySwitch = (s: t, cell: cell, header: array(cell)): t => {
   | 9 => {...s, weight: cell.value}
   | 10 => {...s, comment: cell.value}
   | 11 => {...s, pin: cell.value}
-  | 12 => {...s, stock: cell.value}
+  | 12 => {...s, order_no: cell.value}
   | 13
   | 14
   | 15
