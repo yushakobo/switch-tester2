@@ -158,9 +158,9 @@ let make = () => {
   let (showDebug, setShowDebug) = React.useState(() => false);
 
   let keyMatcher =
-    KeyMapping.useKeyMatcher(Consts.urlOfSwitchesSpreadsheetJson);
+    KeyMapping.useKeyMatcher(Consts.urlOfSwitchesSpreadsheetTsv);
   let stockMatcher =
-    StockDescription.useStockMatcher(Consts.urlOfStocksSpreadsheetJson);
+    StockDescription.useStockMatcher(Consts.urlOfStocksSpreadsheetTsv);
 
   let handleKeyDown = (e: ReactEvent.Keyboard.t): unit => {
     e->ReactEvent.Keyboard.preventDefault;
