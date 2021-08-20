@@ -55,10 +55,10 @@ module HelpButton = {
 
 module SwitchAttributesView = {
   [@react.component]
-  let make = (~attributes: KeySwitch.attributeType) => {
+  let make = (~attributes: KeyMapping.attributeType) => {
     <dl>
       {attributes
-       |> KeySwitch.arrayOfAttributes
+       |> KeyMapping.arrayOfAttributes
        |> Array.map(((k, v)) => {
             [|
               <dt key=k> {React.string(k)} </dt>,
@@ -74,7 +74,7 @@ module SwitchAttributesView = {
 module SwitchView = {
   [@react.component]
   let make =
-      (~keySwitch: option(KeySwitch.t), ~stock: option(StockDescription.t)) => {
+      (~keySwitch: option(KeyMapping.keySwitch), ~stock: option(StockDescription.t)) => {
     let (helpType, setHelpType) = React.useState(_ => None);
 
     let stockDescription =
@@ -205,7 +205,7 @@ let make = () => {
     [|last4|],
   );
 
-  let keySwitch: option(KeySwitch.t) = keyMatcher(currentKey);
+  let keySwitch: option(KeyMapping.keySwitch) = keyMatcher(currentKey);
   let stock: option(StockDescription.t) = stockMatcher(keySwitch);
 
   <div className="container">
