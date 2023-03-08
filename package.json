@@ -8,7 +8,6 @@
     "build": "bsb -clean-world -make-world && next build",
     "start": "next start"
   },
-  "license": "MIT",
   "dependencies": {
     "@glennsl/bs-json": "^5.0.2",
     "next": "latest",
