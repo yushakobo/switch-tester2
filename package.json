@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@glennsl/bs-json": "^5.0.2",
-    "next": "latest",
+    "next": "^10.0.7",
     "next-transpile-modules": "^4.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
