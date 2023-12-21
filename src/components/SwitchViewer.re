@@ -100,7 +100,7 @@ module SwitchView = {
               {React.string(s.comment)}
             </span>
             <span className="switch-order-no">
-              {React.string({j|注文票番号 |j} ++ s.order_no)}
+              {React.string({j|注文票番号/Order Number |j} ++ s.order_no)}
             </span>
           </div>
           <p className="switch-name"> {React.string(s.name)} </p>
