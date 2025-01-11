@@ -4,7 +4,7 @@ let urlOfSwitchesSpreadsheetJson = "https://spreadsheets.google.com/feeds/cells/
 let urlOfSwitchesSpreadsheetTsv = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4-N8yx5dntCVyHfHNR5UX9FZR92cdPgdea4jjEeMqBZ6Hmipyd7Tt15G-qHL1_Lf0Bh1Bod4DslAD/pub?gid=0&single=true&output=tsv";
 let urlOfStocksSpreadsheetJson = "https://spreadsheets.google.com/feeds/cells/11aofIJxgDEI8NQXJBGAcBaFGkG5W-U5dhRkxPalG8uM/od6/public/values?alt=json";
 let urlOfStocksSpreadsheetTsv = "https://docs.google.com/spreadsheets/d/e/2PACX-1vToupvcF03APzJgGFSswyXMNrrj10KViKzg7xBYp_7L-Z-YFRcUzswgAgvpAnAq8FaJWuqx3Apstic5/pub?gid=0&single=true&output=tsv";
-let urlOfTopImage = "tester_top.png";
+let urlOfTopImage = "top_image.gif";
 let urlOfNoImage = "https://www.dropbox.com/s/tipissf3lgqtom6/no_image.png?raw=1";
 let urlOfNeji = "https://www.dropbox.com/s/ynqfdvv2a1bikft/neji.jpg?raw=1";
 
